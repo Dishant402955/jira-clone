@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
-import { ModeToggle } from "@/components/helpers/mode-toggle";
+import { ModeToggle } from "@/components/mode-toggle";
+import Logo from "@/components/logo";
 
 export const metadata: Metadata = {
-	title: "Jira Clone",
+	title: "Zira",
 	description: "A Minimalist jira clone, for humans and by humans",
 };
 
@@ -23,6 +24,7 @@ export default function RootLayout({
 				>
 					{children}
 					<ModeToggle />
+					<Logo className="absolute top-2 left-2 text-xl" />
 				</ThemeProvider>
 			</body>
 		</html>
