@@ -28,6 +28,11 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Loader2Icon, LoaderIcon } from "lucide-react";
+import {
+	signIn,
+	signUpwithGithub,
+	signUpwithGoogle,
+} from "@/actions/auth.actions";
 
 const signInSchema = z.object({
 	email: z.email({ message: "Enter a valid email" }),
@@ -45,19 +50,20 @@ export const SignInCard = () => {
 		},
 	});
 
-	function onSubmit(values: z.infer<typeof signInSchema>) {
-		startTransition(() => {
-			console.log(values);
-			toast.success(
-				`user "${values.email}" with password "${values.password}" logged in.`
-			);
+	function onSubmit({ email, password }: z.infer<typeof signInSchema>) {
+		startTransition(async () => {
+			console.log(email);
+
+			await signIn({ email, password });
+
+			toast.success(`user "$email}" with password "${password}" logged in.`);
 		});
 	}
 
 	return (
 		<>
 			<Suspense fallback={<Loader2Icon className="animate-spin" />}>
-				<Card className="max-h-full md:w-[447px] max-w-[447px] w-[90%]  border-none shadow-sm dark:shadow-accent-foreground/20">
+				<Card className="max-h-full md:w-[447px] max-w-[447px] w-[90%]  border-none">
 					<CardHeader className="gap-2 flex justify-center items-center text-center flex-col mb-4">
 						<CardTitle className="text-xl">Welcome Back!</CardTitle>
 						<CardDescription className="text-xs">
@@ -111,11 +117,7 @@ export const SignInCard = () => {
 									className="w-[90%] bg-indigo-700 cursor-pointer text-white hover:bg-indigo-500"
 									disabled={isLoading}
 								>
-									{isLoading ? (
-										<LoaderIcon className="animate-spin" />
-									) : (
-										"Submit"
-									)}
+									Submit
 								</Button>
 							</form>
 						</Form>
@@ -129,12 +131,20 @@ export const SignInCard = () => {
 						<Button
 							className="w-[90%] cursor-pointer flex justify-center items-center gap-4"
 							variant={"secondary"}
+							onClick={() =>
+								startTransition(async () => await signUpwithGoogle())
+							}
+							disabled={isLoading}
 						>
 							<FcGoogle /> Sign in with Google
 						</Button>
 						<Button
 							className="w-[90%] cursor-pointer  flex justify-center items-center gap-4"
 							variant={"secondary"}
+							onClick={() =>
+								startTransition(async () => await signUpwithGithub())
+							}
+							disabled={isLoading}
 						>
 							<FaGithub /> Sign in with Github
 						</Button>
