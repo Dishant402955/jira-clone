@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { ModeToggle } from "@/components/mode-toggle";
 import Logo from "@/components/logo";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
 	title: "Zira",
@@ -24,7 +25,8 @@ export default function RootLayout({
 				>
 					{children}
 					<ModeToggle />
-					<Logo className="absolute top-2 left-2 text-xl" />
+					<Toaster />
+					<Logo className="absolute top-4 left-6" />
 				</ThemeProvider>
 			</body>
 		</html>
