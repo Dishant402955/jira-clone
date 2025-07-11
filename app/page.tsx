@@ -7,7 +7,13 @@ const Home = async () => {
 	return (
 		<>
 			<div className="flex justify-center items-center h-full w-full">
-				{user ? <User {...user} /> : "Unauthorized"}
+				{user ? (
+					<div className="absolute top-5 right-16">
+						<User {...user} />
+					</div>
+				) : (
+					"Unauthorized"
+				)}
 			</div>
 		</>
 	);

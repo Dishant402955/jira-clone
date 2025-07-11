@@ -112,3 +112,12 @@ export const getLoggedInUser = async () => {
 		return null;
 	}
 };
+
+export const signOut = async () => {
+	const { account } = await createSessionClient();
+
+	(await cookies()).delete("zira-auth-cookie");
+	await account.deleteSession("current");
+
+	redirect("/sign-in");
+};
