@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -19,7 +18,6 @@ import {
 	CardFooter,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import {
 	Form,
 	FormControl,
@@ -32,7 +30,7 @@ import { Input } from "@/components/ui/input";
 import { Loader2Icon, LoaderIcon } from "lucide-react";
 
 const signUpSchema = z.object({
-	username: z.string().min(1, { message: "Username is required" }),
+	username: z.string().trim().min(1, { message: "Username is required" }),
 	email: z.email({ message: "Enter a valid email" }),
 	password: z.string().min(6, { message: "Min 6 characters are required" }),
 });

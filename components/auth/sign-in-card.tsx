@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -19,7 +18,6 @@ import {
 	CardFooter,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import {
 	Form,
 	FormControl,
@@ -144,7 +142,7 @@ export const SignInCard = () => {
 					<CardFooter className="flex justify-center items-center text-center">
 						<Link href={"/sign-up"}>
 							<Button variant={"link"} className="cursor-pointer">
-								Don't Have an account?
+								Don&apos;t Have an account?
 							</Button>
 						</Link>
 					</CardFooter>
