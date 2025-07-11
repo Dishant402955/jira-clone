@@ -4,7 +4,7 @@ import { ID, OAuthProvider } from "node-appwrite";
 import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 
-import { createAdminClient } from "@/lib/appwrite";
+import { createAdminClient, createSessionClient } from "@/lib/appwrite";
 
 interface SIGNUP_PROPS {
 	username: string;
@@ -75,4 +75,40 @@ export const signUpwithGoogle = async () => {
 	);
 
 	return redirect(redirectUrl);
+};
+
+export const getLoggedInUser = async () => {
+	try {
+		const { account } = await createSessionClient();
+		const session = await account.getSession("current");
+
+		const { user } = await createAdminClient();
+		const {
+			$id,
+			$createdAt,
+			$updatedAt,
+			accessedAt,
+			email,
+			emailVerification,
+			labels,
+			mfa,
+			name,
+			passwordUpdate,
+		} = await user.get(session.userId);
+
+		return {
+			$id,
+			$createdAt,
+			$updatedAt,
+			accessedAt,
+			email,
+			emailVerification,
+			labels,
+			mfa,
+			name,
+			passwordUpdate,
+		};
+	} catch (error) {
+		return null;
+	}
 };
