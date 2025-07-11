@@ -10,7 +10,7 @@ export function ModeToggle() {
 	const { setTheme, theme } = useTheme();
 
 	return (
-		<div className="absolute top-4 right-2">
+		<div className="absolute bottom-6 left-6">
 			{theme === "light" ? (
 				<Button
 					onClick={() => {
