@@ -3,7 +3,6 @@ import { Popover, PopoverTrigger } from "./ui/popover";
 import {
 	Card,
 	CardContent,
-	CardDescription,
 	CardFooter,
 	CardHeader,
 	CardTitle,
@@ -29,17 +28,14 @@ interface USER_PROPS {
 }
 
 export const User = ({
-	$id,
 	$createdAt,
 	$updatedAt,
 	accessedAt,
 	email,
 	emailVerification,
-	labels,
 	mfa,
 	name,
 	passwordUpdate,
-	className,
 }: USER_PROPS) => {
 	return (
 		<>

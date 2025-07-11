@@ -27,7 +27,7 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Loader2Icon, LoaderIcon } from "lucide-react";
+import { Loader2Icon } from "lucide-react";
 import {
 	signUp,
 	signUpwithGithub,
@@ -56,7 +56,7 @@ export const SignUpCard = () => {
 		startTransition(async () => {
 			console.log(email, password, username);
 
-			const res = await signUp({ email, password, username });
+			await signUp({ email, password, username });
 			toast.success(
 				`user "${username}" with email ${email}" and password "${password}" logged in.`
 			);

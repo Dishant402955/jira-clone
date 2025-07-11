@@ -2,7 +2,7 @@ import { createAdminClient } from "@/lib/appwrite";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
-// @ts-ignore
+// @ts-expect-error cause there is no proper types are found for that
 export const GET = async (req) => {
 	const userId = req.nextUrl.searchParams.get("userId");
 	const secret = req.nextUrl.searchParams.get("secret");
