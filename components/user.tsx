@@ -1,15 +1,8 @@
-import { PopoverContent } from "@radix-ui/react-popover";
-import { Popover, PopoverTrigger } from "./ui/popover";
-import {
-	Card,
-	CardContent,
-	CardFooter,
-	CardHeader,
-	CardTitle,
-} from "./ui/card";
+import { Popover, PopoverTrigger, PopoverContent } from "./ui/popover";
+import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
 import { SignOut } from "./auth/sign-out";
 import { Button } from "./ui/button";
-import { ArrowRight, LogOutIcon, SettingsIcon } from "lucide-react";
+import { LogOutIcon, SettingsIcon } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "./ui/dialog";
 import { format, parseISO } from "date-fns";
 
