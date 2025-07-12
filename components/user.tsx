@@ -9,7 +9,7 @@ import {
 } from "./ui/card";
 import { SignOut } from "./auth/sign-out";
 import { Button } from "./ui/button";
-import { ArrowRight, SettingsIcon } from "lucide-react";
+import { ArrowRight, LogOutIcon, SettingsIcon } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "./ui/dialog";
 import { format, parseISO } from "date-fns";
 
@@ -35,14 +35,13 @@ export const User = ({
 	emailVerification,
 	mfa,
 	name,
-	passwordUpdate,
 }: USER_PROPS) => {
 	return (
 		<>
 			<Popover>
 				<PopoverTrigger>
-					<div className="size-8 rounded-full bg-gradient-to-r from-fuchsia-400  to-indigo-400 cursor-pointer border-2 border-neutral-400 flex justify-center items-center">
-						<p className="text-2xl text-black font-bold">
+					<div className="size-9 rounded-full bg-emerald-700 cursor-pointer border-2 border-neutral-400 flex justify-center items-center ">
+						<p className="text-2xl text-white font-bold">
 							{name[0].toUpperCase()}
 						</p>
 					</div>
@@ -54,10 +53,16 @@ export const User = ({
 					className="w-[360px]"
 				>
 					<Card className="border-none w-full">
-						<CardHeader>
-							<CardTitle>
-								{name} | {email}
-							</CardTitle>
+						<CardHeader className="flex justify-start items-center gap-4 pl-8">
+							<div className="size-9 rounded-full bg-emerald-700 cursor-pointer border-2 border-neutral-400 flex justify-center items-center">
+								<p className="text-2xl text-white font-bold">
+									{name[0].toUpperCase()}
+								</p>
+							</div>
+							<div className="flex flex-col justify-center items-start">
+								<p className="text-xl">{name}</p>
+								<p className="text-sm">{email}</p>
+							</div>
 						</CardHeader>
 						<CardContent>
 							<Dialog>
@@ -70,57 +75,47 @@ export const User = ({
 								<DialogTitle></DialogTitle>
 								<DialogContent className="flex justify-center items-center flex-col pt-10">
 									<div className="flex justify-between items-center w-full">
-										<p className="w-[40%]">Name</p>
+										<p className="w-[30%]">Name</p>
 										<p>:</p>
-										<p className="w-[40%] truncate flex justify-end">{name}</p>
+										<p className="w-[50%] truncate flex justify-end">{name}</p>
 									</div>
 									<div className="flex justify-between items-center w-full">
-										<p className="w-[40%]">Email</p>
+										<p className="w-[30%]">Email</p>
 										<p>:</p>
-										<p className="w-[40%] truncate flex justify-end">{email}</p>
+										<p className="w-[50%] truncate flex justify-end">{email}</p>
 									</div>
 									<div className="flex justify-between items-center w-full">
-										<p className="w-[40%]">Created at</p>
+										<p className="w-[30%]">Created at</p>
 										<p>:</p>
-										<p className="w-[40%] truncate flex justify-end">
+										<p className="w-[50%] truncate flex justify-end">
 											{format(parseISO($createdAt), "MMMM d, yyyy 'at' h:mm a")}
 										</p>
 									</div>
 									<div className="flex justify-between items-center w-full">
-										<p className="w-[40%]">Updated at</p>
+										<p className="w-[30%]">Updated at</p>
 										<p>:</p>
-										<p className="w-[40%] truncate flex justify-end">
+										<p className="w-[50%] truncate flex justify-end">
 											{format(parseISO($updatedAt), "MMMM d, yyyy 'at' h:mm a")}
 										</p>
 									</div>
 									<div className="flex justify-between items-center w-full">
-										<p className="w-[40%]">Last accessed</p>
+										<p className="w-[30%]">Last accessed</p>
 										<p>:</p>
-										<p className="w-[40%] truncate flex justify-end">
+										<p className="w-[50%] truncate flex justify-end">
 											{format(parseISO(accessedAt), "MMMM d, yyyy 'at' h:mm a")}
 										</p>
 									</div>
 									<div className="flex justify-between items-center w-full">
-										<p className="w-[40%]">Email Verified</p>
+										<p className="w-[30%]">Email Verified</p>
 										<p>:</p>
-										<p className="w-[40%] truncate flex justify-end">
+										<p className="w-[50%] truncate flex justify-end">
 											{emailVerification ? "Yes" : "No"}
 										</p>
 									</div>
 									<div className="flex justify-between items-center w-full">
-										<p className="w-[40%]">Last Password Update</p>
+										<p className="w-[30%]">Multifactor Enabled</p>
 										<p>:</p>
-										<p className="w-[40%] truncate flex justify-end">
-											{format(
-												parseISO(passwordUpdate),
-												"MMMM d, yyyy 'at' h:mm a"
-											)}
-										</p>
-									</div>
-									<div className="flex justify-between items-center w-full">
-										<p className="w-[40%]">Multifactor Auth Enabled</p>
-										<p>:</p>
-										<p className="w-[40%] truncate flex justify-end">
+										<p className="w-[50%] truncate flex justify-end">
 											{mfa ? "Yes" : "No"}
 										</p>
 									</div>
@@ -129,8 +124,11 @@ export const User = ({
 						</CardContent>
 						<CardFooter className="w-full">
 							<SignOut>
-								<Button variant={"outline"} className="w-full cursor-pointer">
-									Sign Out <ArrowRight />
+								<Button
+									variant={"secondary"}
+									className="w-full cursor-pointer text-[#d54c4c] border border-[#8b5b5b]"
+								>
+									<LogOutIcon color="#d54c4c" /> Sign Out
 								</Button>
 							</SignOut>
 						</CardFooter>

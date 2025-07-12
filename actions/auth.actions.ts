@@ -1,6 +1,6 @@
 "use server";
 
-import { ID, OAuthProvider } from "node-appwrite";
+import { Account, Client, ID, OAuthProvider } from "node-appwrite";
 import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -79,10 +79,19 @@ export const signUpwithGoogle = async () => {
 
 export const getLoggedInUser = async () => {
 	try {
-		const { account } = await createSessionClient();
-		const session = await account.getSession("current");
+		const client = new Client()
+			.setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!)
+			.setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID!);
 
-		const { user } = await createAdminClient();
+		const session = (await cookies()).get("zira-auth-cookie");
+
+		if (!session) {
+			return null;
+		}
+
+		client.setSession(session.value);
+		const account = new Account(client);
+
 		const {
 			$id,
 			$createdAt,
@@ -94,7 +103,7 @@ export const getLoggedInUser = async () => {
 			mfa,
 			name,
 			passwordUpdate,
-		} = await user.get(session.userId);
+		} = await account.get();
 
 		return {
 			$id,
